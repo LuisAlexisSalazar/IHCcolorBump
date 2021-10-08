@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Build.Content;
+using UnityEngine.Windows.Speech;
+using System.Linq;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -20,7 +22,27 @@ public class BallController : MonoBehaviour
     [SerializeField] private float wallDistance = 5f;
     [SerializeField] private float minCamDistance = 3f;
 
+    KeywordRecognizer keywordRecognizer;
+    Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
 
+    void Start()
+    {
+        //SUBE,ARRIBA,SALTA
+        keywords.Add("sube", Jump);
+
+
+        keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
+        keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
+        keywordRecognizer.Start();
+    }
+    
+    
+    private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    {
+        Debug.Log(args.text);
+        keywords[args.text].Invoke();
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -30,21 +52,19 @@ public class BallController : MonoBehaviour
         //[0..0.5..1]
         // Debug.Log("H"+mh);
         // Debug.Log("V:"+mh);
-        
-    
-        Vector3 force = new Vector3(mh, 0, 1)*thrust;
-        // Debug.Log(force);
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(force);
-            Jump();
-        }
-        else
-            rb.AddForce(force);
+        Vector3 force = new Vector3(mh, 0, 1) * thrust;
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     rb.AddForce(force);
+        //     Jump();
+        // }
+        // else
+        rb.AddForce(force);
     }
 
     public void Jump()
     {
+        Debug.Log("JUMP");
         rb.AddForce(0,15,0,ForceMode.Impulse);
     }
     
@@ -74,7 +94,7 @@ public class BallController : MonoBehaviour
     {
         //?Imprime con todo los objetos que choquemos (incluido el suelo)
         // Debug.Log(collision.ToString());
-        Debug.Log(collision.gameObject.tag);
+        // Debug.Log(collision.gameObject.tag);
 
         if (GameManager.singleton.GameEnded)
             return;
