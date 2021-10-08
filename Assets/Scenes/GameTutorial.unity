@@ -10452,7 +10452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886535184}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.254, z: 8.725}
+  m_LocalPosition: {x: 0, y: 0.254, z: 285.51}
   m_LocalScale: {x: 0.99733317, y: 1, z: 0.006357401}
   m_Children: []
   m_Father: {fileID: 573039233}
@@ -10483,6 +10483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619a6f49d31aaf64fbd4fabcf7bf7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indexLevel: 1
 --- !u!64 &886535188
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12017,6 +12018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619a6f49d31aaf64fbd4fabcf7bf7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indexLevel: 1
 --- !u!4 &1027555378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7982743924380068259, guid: 01957de38080a204f9d6850ba539acd7, type: 3}
@@ -15731,6 +15733,19 @@ MonoBehaviour:
   rb: {fileID: 1321176531}
   wallDistance: 5
   minCamDistance: 3
+  speedUp: 0
+  time: 0
+  justOne: 0
+  bullet: {fileID: 0}
+  shootForce: 0
+  muzzleFlash: {fileID: 0}
+  fcam: {fileID: 0}
+  attackPoint: {fileID: 0}
+  allowInvoke: 1
+  objDestro:
+    serializedVersion: 2
+    m_Bits: 0
+  cam: {fileID: 0}
 --- !u!54 &1321176531
 Rigidbody:
   m_ObjectHideFlags: 0
