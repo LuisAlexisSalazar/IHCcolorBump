@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private int index_Scene = 0;
     public static GameManager singleton;
     public bool GameStarted { get; private set; }
     public bool GameEnded { get; private set; }
@@ -69,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     public void RestarGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(index_Scene);
     }
 
     void Update()

@@ -14,7 +14,7 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    [SerializeField] [Range(1, 5)]
+    [SerializeField] [Range(1, 10)]
     //!Remmplazar por los dedos de mano (OpenCV)
     private float thrust = 1f;
 
@@ -106,6 +106,7 @@ public class BallController : MonoBehaviour
         if (dataFaceAcceleration.y != 0)
             thrust = dataFaceAcceleration.y * 5;
 
+        // Debug.Log("Aceleración: " + thrust);
         Vector3 force = new Vector3(move_x, 0, 1) * thrust;
 
         rb.AddForce(force);
@@ -259,6 +260,9 @@ public class BallController : MonoBehaviour
         string dataReceived = Encoding.UTF8.GetString(buffer, 0, byteRead);
 
         if (dataReceived != null)
+        {
             dataFaceAcceleration = StringToArray(dataReceived);
+            // Debug.Log("Nueva Aceleración: "+dataFaceAcceleration.y);
+        }
     }
 }

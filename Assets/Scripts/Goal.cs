@@ -31,6 +31,7 @@ public class Goal : MonoBehaviour
         // GameManager.singleton.EndGame(true);
 
         //!Pasar de Nivel
+        Debug.Log("Cargando Nueva Escena");
         SceneManager.LoadScene(prefijNameScene + indexLevel.ToString());
     }
 }
