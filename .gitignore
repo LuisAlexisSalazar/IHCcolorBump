@@ -58,7 +58,3 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# Folder as unityPacket
-Assets/Materials/BallPack
-Assets/Materials/ObstacleCoursePack
-Assets/Materials/*.meta

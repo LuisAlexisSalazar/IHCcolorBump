@@ -212,8 +212,7 @@ public class BallController : MonoBehaviour
             directionWithoutSpread = new Vector3(directionWithoutSpread.x, directionWithoutSpread.y, directionWithoutSpread.z % 5);
         }
         Vector3 unit = new Vector3(0.0f, 0.0f, 1f);*/
-        currentBullet.GetComponent<Rigidbody>()
-            .AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
+        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
         GameObject.Destroy(currentBullet, 3f);
 
         if (muzzleFlash != null)
