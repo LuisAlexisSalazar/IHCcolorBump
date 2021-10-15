@@ -8,6 +8,7 @@ TagManager:
   - Death
   - Ball
   - FinishLine
+  - StartLine
   layers:
   - Default
   - TransparentFX

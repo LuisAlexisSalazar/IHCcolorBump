@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int index_Scene = 0;
+    [SerializeField] private int index_Scene = 1;
     public static GameManager singleton;
     public bool GameStarted { get; private set; }
     public bool GameEnded { get; private set; }
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         if (!win)
         {
             //Resetear el juego
+            Debug.Log("SlowMotion");
             Invoke("RestarGame", slowMotionFactor);
             Time.timeScale = slowMotionFactor;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;

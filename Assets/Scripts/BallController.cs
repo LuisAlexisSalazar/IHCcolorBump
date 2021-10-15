@@ -78,10 +78,10 @@ public class BallController : MonoBehaviour
         keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
         keywordRecognizer.Start();
 
-        //Conexión a python con otro thread
-        ThreadStart ts = new ThreadStart(GetInfo);
-        mThread = new Thread(ts);
-        mThread.Start();
+        // Conexión a python con otro thread
+         ThreadStart ts = new ThreadStart(GetInfo);
+         mThread = new Thread(ts);
+         mThread.Start();
     }
 
 
@@ -89,9 +89,9 @@ public class BallController : MonoBehaviour
     void Update()
     {
         GameManager.singleton.StartGame();
-        float move_x = Input.GetAxis("Horizontal");
+        // float move_x = Input.GetAxis("Horizontal");
         //?usar detector de Cara
-        // float move_x = dataFaceAcceleration.x;
+        float move_x = dataFaceAcceleration.x;
 
         //--------------
         if (justOne && speedUp)
@@ -160,7 +160,10 @@ public class BallController : MonoBehaviour
             return;
 
         if (collision.gameObject.tag == "Death")
+        {
+            // Debug.Log(collision.gameObject.tag);
             GameManager.singleton.EndGame(false);
+        }
     }
 
 
@@ -206,7 +209,7 @@ public class BallController : MonoBehaviour
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
 
         //FORCE TO THE BULLET
-        Debug.Log(directionWithoutSpread);
+        // Debug.Log(directionWithoutSpread);
         /*if(directionWithoutSpread.z > 5)
         {
             directionWithoutSpread = new Vector3(directionWithoutSpread.x, directionWithoutSpread.y, directionWithoutSpread.z % 5);
@@ -223,7 +226,7 @@ public class BallController : MonoBehaviour
 
     private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
-        Debug.Log(args.text);
+        // Debug.Log(args.text);
         keywords[args.text].Invoke();
     }
 

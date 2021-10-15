@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    string prefijNameScene = "GameLevel";
+    string prefijNameScene = "Mundo";
     [SerializeField] private int indexLevel = 1;
 
     // private GameObject[] Ball;
@@ -24,14 +24,14 @@ public class Goal : MonoBehaviour
         if (!ball || GameManager.singleton.GameEnded)
             return;
 
-        Debug.Log(other);
-        Debug.Log("Objetivo tocado");
+        // Debug.Log(other);
+        // Debug.Log("Objetivo tocado");
 
         //!Reiniciar el Juego
-        // GameManager.singleton.EndGame(true);
+        GameManager.singleton.EndGame(true);
 
         //!Pasar de Nivel
-        Debug.Log("Cargando Nueva Escena");
-        SceneManager.LoadScene(prefijNameScene + indexLevel.ToString());
+        // Debug.Log("Cargando Nueva Escena");
+        // SceneManager.LoadScene(prefijNameScene + indexLevel.ToString());
     }
 }
