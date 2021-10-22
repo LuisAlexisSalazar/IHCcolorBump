@@ -1,14 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    string prefijNameScene = "Mundo";
-    [SerializeField] private int indexLevel = 1;
-
     // private GameObject[] Ball;
 
     // https://docs.unity3d.com/ScriptReference/Collider.OnTriggerEnter.html
@@ -19,19 +15,12 @@ public class Goal : MonoBehaviour
         BallController ball = other.GetComponent<BallController>();
 
         // Ball =  GameObject.FindGameObjectsWithTag ("Ball"); 
-        // Debug.Log("Goal: " + GameManager.singleton.GameEnded);
-
+        Debug.Log("Goal: " + GameManager.singleton.GameEnded);
+        
         if (!ball || GameManager.singleton.GameEnded)
             return;
-
-        // Debug.Log(other);
-        // Debug.Log("Objetivo tocado");
-
-        //!Reiniciar el Juego
+        Debug.Log(other);
+        Debug.Log("Objetivo tocado");
         GameManager.singleton.EndGame(true);
-
-        //!Pasar de Nivel
-        // Debug.Log("Cargando Nueva Escena");
-        // SceneManager.LoadScene(prefijNameScene + indexLevel.ToString());
     }
 }

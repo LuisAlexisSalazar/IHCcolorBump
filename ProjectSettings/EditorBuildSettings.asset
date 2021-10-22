@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mundo1.unity
     guid: 7c3cc21c76d64524eac201551c132177
+  - enabled: 1
+    path: Assets/Scenes/GameMenu.unity
+    guid: f753c18489525aa4eaf7f58cbbf3857e
+  - enabled: 1
+    path: Assets/Scenes/VideMenu.unity
+    guid: e3f9d5d5aabf7974d9bb641d602d638b
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 78149986f0468a54595e52e5b64ff6a7
+  - enabled: 1
+    path: Assets/Scenes/DeadMenu.unity
+    guid: 4ff299a38fc129f47984829b31aa9e7d
   m_configObjects: {}
