@@ -11,6 +11,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //WINDOWS SPEECH
 
@@ -239,8 +240,9 @@ public class BallController : MonoBehaviour
         if (collision.gameObject.tag == "Death")
         {
             // Debug.Log(collision.gameObject.tag);
-            GameManager.singleton.EndGame(false);
+            // GameManager.singleton.EndGame(false);
             close_python = true;
+            SceneManager.LoadScene("DeadMenu");
             // running = false;
         }
     }
