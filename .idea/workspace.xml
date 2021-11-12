@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="deb98fe3-63cb-465f-b828-97c81d3ef1e8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/Materials/SplitMetalBall.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/Materials/SplitMetalBall.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/Materials/SplitMetalBall.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/Materials/SplitMetalBall.mat.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/SplitMetalBall.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/SplitMetalBall.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/Textures/SplitMetalBall.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/Textures/SplitMetalBall.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/Textures/SplitMetalBallEmissive.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BallPack/Models/Textures/SplitMetalBallEmissive.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Mundo0.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Mundo0.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="20njsK8JG7kpib7RBrTftUPvfbP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Face-Detector-Unity" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="deb98fe3-63cb-465f-b828-97c81d3ef1e8" name="Default Changelist" comment="" />
+      <created>1636687451407</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1636687451407</updated>
+      <workItem from="1636687460632" duration="19000" />
+    </task>
+    <servers />
+  </component>
+</project>

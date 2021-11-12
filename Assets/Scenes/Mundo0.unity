@@ -4746,7 +4746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9913827fc1f825043aaf2110d9509040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index_Scene: 0
   slowMotionFactor: 0.1
   startTransform: {fileID: 1856801208}
   goalTransform: {fileID: 886535185}
@@ -6985,7 +6984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619a6f49d31aaf64fbd4fabcf7bf7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexLevel: 1
 --- !u!64 &886535188
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10643,7 +10641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ae1b6d4c894f9c449d33837a633a8ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.08
+      value: -1.546
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ae1b6d4c894f9c449d33837a633a8ec, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10651,7 +10649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ae1b6d4c894f9c449d33837a633a8ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.41
+      value: 1.961
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ae1b6d4c894f9c449d33837a633a8ec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10720,12 +10718,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88a4039912ee6242834c3356d253973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2.95
+  thrust: 2.14
   rb: {fileID: 1321176531}
   wallDistance: 5
   minCamDistance: 3
   speedUp: 0
   time: 0
+  fSpeed: 0
   justOne: 0
   bullet: {fileID: 0}
   shootForce: 0
