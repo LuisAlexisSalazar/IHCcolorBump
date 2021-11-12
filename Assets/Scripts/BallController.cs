@@ -171,6 +171,31 @@ public class BallController : MonoBehaviour
 
     private void Shoot()
     {
+        if (fcam == null)
+        {
+            try
+            {
+                fcam = GameObject.FindGameObjectWithTag ("ShootCam").GetComponent<Camera> () as Camera;
+            }
+            catch (NullReferenceException)
+            {
+                fcam = null;
+            }
+        }
+        
+        if (attackPoint == null)
+        {
+            try
+            {
+                attackPoint = GameObject.FindGameObjectWithTag ("AttackPoint").transform;
+            }
+            catch (NullReferenceException)
+            {
+                attackPoint = null;
+            }
+        }
+        
+        
         //LA DIRECCION DE LA CAMARA
         Ray ray = fcam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;

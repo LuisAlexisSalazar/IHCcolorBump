@@ -9,6 +9,9 @@ TagManager:
   - Ball
   - FinishLine
   - StartLine
+  - Bullet
+  - ShootCam
+  - AttackPoint
   layers:
   - Default
   - TransparentFX
