@@ -6,55 +6,53 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     // public Vector3 offset = new Vector3(-0.3f, 5.5f, -0.8f);
-    public GameObject Ball;
+    public GameObject Ball = null;
     private Vector3 posInitial;
     private Vector3 relative;
-    
-    //--
-    private Transform target=null;
-    //--
+
     private void Start()
     {
         posInitial = transform.position;
-
-        //-----
-        // target = GameObject.FindGameObjectWithTag("Ball").transform;
-        //-----
-
-        relative = transform.position - Ball.transform.position;
-      
-
-        // relative = transform.position - target.transform.position;
-        
     }
 
     private void LateUpdate()
     {
-        
-        if (target == null)
+        if (Ball == null)
         {
             try
             {
-                target = GameObject.FindGameObjectWithTag("Ball").transform;
+                Ball = GameObject.FindGameObjectWithTag("Ball");
+                relative = transform.position - Ball.transform.position;
             }
             catch (NullReferenceException)
             {
-                target = null;
+                Ball = null;
+                return;
             }
         }
-        //--
-        // target = GameObject.FindGameObjectWithTag("Ball").transform;
-        //--
-        
-        if (GameManager.singleton.GameStarted)
-        {
-            // Vector3 newPosition = Ball.transform.position + relative;
-            
-            //---
-            Vector3 newPosition = target.transform.position + relative;
-            //--
-            
-            transform.position = new Vector3(posInitial.x, newPosition.y, newPosition.z);
-        }
+
+
+        if (!GameManager.singleton.GameStarted) return;
+
+        Vector3 newPosition = Ball.transform.position + relative;
+        transform.position = new Vector3(posInitial.x, newPosition.y, newPosition.z);
     }
+
+    // IEnumerator setConfig()
+    // {
+    //     while (target != null)
+    //     {
+    //         try
+    //         {
+    //             target = GameObject.FindGameObjectWithTag("Ball").transform;
+    //             relative = transform.position - target.position;
+    //         }
+    //         catch (NullReferenceException)
+    //         {
+    //             target = null;
+    //         }
+    //     }
+    //
+    //     yield return null;
+    // }
 }

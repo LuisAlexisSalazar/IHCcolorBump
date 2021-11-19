@@ -180,6 +180,7 @@ public class BallController : MonoBehaviour
             catch (NullReferenceException)
             {
                 fcam = null;
+                return;
             }
         }
         
@@ -192,6 +193,7 @@ public class BallController : MonoBehaviour
             catch (NullReferenceException)
             {
                 attackPoint = null;
+                return;
             }
         }
         
