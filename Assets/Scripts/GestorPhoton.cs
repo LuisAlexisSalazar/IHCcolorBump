@@ -40,11 +40,18 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
             existBall = true;
 
         if (existBall)
+        {
             Debug.Log("Jugador 2 debe controlar balon 1");
+            PhotonNetwork.Instantiate("MovSecondPlayer", new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
+            // MovSecondPlayer
+        }
 
         else
+        {
             // Objeto de la carpeta resources , dodne se instanciara
             PhotonNetwork.Instantiate("SplitMetalBall", new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
+        }
     }
 }
