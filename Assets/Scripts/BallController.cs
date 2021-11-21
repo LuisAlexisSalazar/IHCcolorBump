@@ -23,6 +23,9 @@ public class BallController : MonoBehaviour
     //influencia la velocidad de la bola
     private float thrust = 1f;
 
+    public bool flagKeyboard = false;
+    private float move_x = 0;
+
     [SerializeField]
     //objeto que controla la posición
     private Rigidbody rb;
@@ -112,9 +115,16 @@ public class BallController : MonoBehaviour
     void Update()
     {
         GameManager.singleton.StartGame();
-        // float move_x = Input.GetAxis("Horizontal");
-        //?usar detector de Cara
-        float move_x = dataFaceAcceleration.x;
+
+        if (flagKeyboard)
+        {
+            move_x = Input.GetAxis("Horizontal");
+        }
+        else
+        {
+            //?usar detector de Cara
+            move_x = dataFaceAcceleration.x;
+        }
 
         //--------------
         if (justOne && speedUp)
@@ -175,7 +185,8 @@ public class BallController : MonoBehaviour
         {
             try
             {
-                fcam = GameObject.FindGameObjectWithTag ("ShootCam").GetComponent<Camera> () as Camera;
+                fcam = GameObject.FindGameObjectWithTag("ShootCam")
+                    .GetComponent<Camera>() as Camera;
             }
             catch (NullReferenceException)
             {
@@ -183,12 +194,12 @@ public class BallController : MonoBehaviour
                 return;
             }
         }
-        
+
         if (attackPoint == null)
         {
             try
             {
-                attackPoint = GameObject.FindGameObjectWithTag ("AttackPoint").transform;
+                attackPoint = GameObject.FindGameObjectWithTag("AttackPoint").transform;
             }
             catch (NullReferenceException)
             {
@@ -196,8 +207,8 @@ public class BallController : MonoBehaviour
                 return;
             }
         }
-        
-        
+
+
         //LA DIRECCION DE LA CAMARA
         Ray ray = fcam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
@@ -273,14 +284,14 @@ public class BallController : MonoBehaviour
             // running = false;
         }
     }
-    
+
     public static Vector2 StringToArray(string WholeStringArray)
     {
         string[] sArray = WholeStringArray.Split(',');
         Vector2 result = new Vector2(float.Parse(sArray[0]), float.Parse(sArray[1]));
         return result;
     }
-    
+
     void GetInfo()
     {
         localAdd = IPAddress.Parse(connectionIp);
@@ -296,7 +307,7 @@ public class BallController : MonoBehaviour
         listener.Stop();
         client.Close();
     }
-    
+
     void ReceiveData()
     {
         NetworkStream networkStream = client.GetStream();

@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2482094199968868478}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.195, y: -0.138, z: 2.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 1
+  flagKeyboard: 1
   rb: {fileID: 2482094201068273108}
   wallDistance: 5
   minCamDistance: 3
@@ -323,7 +324,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 2482094201068273106}
   - {fileID: 2482094201068273107}
-  sceneViewId: 0
+  sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &2482094201068273106
