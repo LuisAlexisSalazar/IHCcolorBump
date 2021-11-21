@@ -36,7 +36,7 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
     //Que va ocurrir cuando nos unamos al cuarto
     public override void OnJoinedRoom()
     {
-        if (GameObject.FindGameObjectWithTag("Ball") != null)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
             existBall = true;
 
         if (existBall)
