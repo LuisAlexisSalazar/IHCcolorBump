@@ -44,11 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da20e3a464c76a4aa5ecd0eb9a338fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1
-  rb: {fileID: 0}
-  wallDistance: 5
-  minCamDistance: 3
-  muzzleFlash: {fileID: 0}
 --- !u!114 &1527816589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +63,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 2
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
