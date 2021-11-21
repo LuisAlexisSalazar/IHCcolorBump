@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +7,8 @@ using Photon.Realtime;
 
 public class GestorPhoton : MonoBehaviourPunCallbacks
 {
+    private bool existBall = false;
+
     void Start()
     {
         //Conexión al servidor
@@ -25,7 +26,7 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
     }
 
     //Unirse al lobby
-    public override  void OnJoinedLobby()
+    public override void OnJoinedLobby()
     {
         //Unirse a un room ya creado o creara el room si no existe
         PhotonNetwork.JoinOrCreateRoom("Cuarto", new RoomOptions {MaxPlayers = 2},
@@ -35,10 +36,18 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
     //Que va ocurrir cuando nos unamos al cuarto
     public override void OnJoinedRoom()
     {
-        //Objeto de la carpeta resources , dodne se instanciara
-        PhotonNetwork.Instantiate("SplitMetalBall", new Vector3(-0.2f, -0.15f, 2.41f),
-            Quaternion.identity);
-        
-        
+        if (GameObject.FindGameObjectWithTag("Ball") != null)
+            existBall = true;
+
+        if (existBall)
+        {
+            Debug.Log("Jugador 2 debe controlar balon 1");
+        }
+        else
+        {
+            //Objeto de la carpeta resources , dodne se instanciara
+            PhotonNetwork.Instantiate("SplitMetalBall", new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
+        }
     }
 }
