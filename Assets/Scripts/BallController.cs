@@ -12,11 +12,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
 //WINDOWS SPEECH
 
 
 public class BallController : MonoBehaviour
+// public class BallController : MonoBehaviourPun
 {
     [SerializeField] [Range(1, 5)]
     //!Remmplazar por los dedos de mano (OpenCV)
@@ -166,7 +167,8 @@ public class BallController : MonoBehaviour
         speedUp = true;
         justOne = true;
     }
-
+    
+    [PunRPC]
     public void Jump()
     {
         Debug.Log("JUMP");
