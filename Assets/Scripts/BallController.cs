@@ -13,6 +13,7 @@ using UnityEngine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+
 //WINDOWS SPEECH
 
 
@@ -87,11 +88,14 @@ public class BallController : MonoBehaviour
     private Vector2 dataFaceAcceleration = Vector2.zero;
     private bool running;
     private bool close_python;
+    private PhotonView PV;
 
     void Start()
     {
         speedUp = false;
+        PV = GetComponent<PhotonView>();
         //SUBE,ARRIBA,SALTA
+        // keywords.Add("sube", Jump);
         keywords.Add("sube", Jump);
         keywords.Add("dispara", fire);
         keywords.Add("turbo", Nitro);
@@ -163,13 +167,25 @@ public class BallController : MonoBehaviour
 
     public void Nitro()
     {
+        PV.RPC("realityNitro", RpcTarget.All);
+    }
+    
+    [PunRPC]
+    public void realityNitro()
+    {
         Debug.Log("Nitro");
         speedUp = true;
         justOne = true;
     }
-    
+
+
+    void Jump()
+    {
+        PV.RPC("realityJump", RpcTarget.All);
+    }
+
     [PunRPC]
-    public void Jump()
+    void realityJump()
     {
         Debug.Log("JUMP");
         rb.AddForce(0, 15, 0, ForceMode.Impulse);
@@ -178,9 +194,11 @@ public class BallController : MonoBehaviour
     private void fire()
     {
         Debug.Log("FIRE");
-        Shoot();
+        PV.RPC("Shoot", RpcTarget.All);
+        // Shoot();
     }
 
+    [PunRPC]
     private void Shoot()
     {
         if (fcam == null)
