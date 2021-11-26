@@ -17,13 +17,14 @@ public class Crear_Room : MonoBehaviourPunCallbacks
 
     public void Create_Room()
     {
-        numero = 1;
+        numero = Random.Range(1,100);
         Debug.Log("Intentando crear sala");
         //PhotonNetwork.DestroyAll();
         //PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LeaveLobby();
+        //PhotonNetwork.LeaveLobby();
         PhotonNetwork.JoinOrCreateRoom("Room: " + numero, new RoomOptions() { MaxPlayers = 2}, TypedLobby.Default);
         Debug.Log("Sala Creada");
+        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
