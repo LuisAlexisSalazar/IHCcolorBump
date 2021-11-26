@@ -23,4 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeadMenu.unity
     guid: 4ff299a38fc129f47984829b31aa9e7d
+  - enabled: 1
+    path: Assets/Scenes/RoomDesert.unity
+    guid: 505425f65014cd34db5426c5d1cf2627
+  - enabled: 1
+    path: Assets/Scenes/RoomWhite.unity
+    guid: 4ff15c5444a09fa499572e7aa1050aa9
+  - enabled: 1
+    path: Assets/Scenes/GameMenu2.unity
+    guid: 6f2a014ae4566b847b133c746b732b1a
   m_configObjects: {}
