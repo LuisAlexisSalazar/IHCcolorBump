@@ -18,6 +18,10 @@ public class Crear_Room : MonoBehaviourPunCallbacks
     public void Create_Room()
     {
         numero = 1;
+        Debug.Log("Intentando crear sala");
+        //PhotonNetwork.DestroyAll();
+        //PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LeaveLobby();
         PhotonNetwork.JoinOrCreateRoom("Room: " + numero, new RoomOptions() { MaxPlayers = 2}, TypedLobby.Default);
         Debug.Log("Sala Creada");
     }
