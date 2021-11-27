@@ -18,7 +18,7 @@ public class BallController : MonoBehaviour
     private float thrust = 1f;
 
     public bool flagKeyboard = false;
-    private float move_x = 0;
+    public float moveX = 0;
 
     [SerializeField]
     //objeto que controla la posición
@@ -29,7 +29,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private float wallDistance = 5f;
     [SerializeField] private float minCamDistance = 3f;
 
-
+    public bool closePython;
     //SpeedUp
     public bool speedUp;
     public float time = 0f;
@@ -54,26 +54,14 @@ public class BallController : MonoBehaviour
 
 
     //VOICE
-    //!Conexción con python
-    private Thread mThread;
-    private string connectionIp = "127.0.0.1";
-    private int connectionpPort = 50001;
-    private IPAddress localAdd;
-    private TcpClient client;
-    private TcpListener listener;
-    private Vector2 dataFaceAcceleration = Vector2.zero;
-    private bool running;
-    private bool close_python;
-    private PhotonView PV;
+    public Vector2 dataFaceAcceleration = Vector2.zero;
+
+    
+ 
 
     void Start()
     {
         speedUp = false;
-
-        // Conexión a python con otro thread
-        ThreadStart ts = new ThreadStart(GetInfo);
-        mThread = new Thread(ts);
-        mThread.Start();
     }
 
 
@@ -82,16 +70,7 @@ public class BallController : MonoBehaviour
     {
         GameManager.singleton.StartGame();
 
-        if (flagKeyboard)
-        {
-            move_x = Input.GetAxis("Horizontal");
-        }
-        else
-        {
-            //?usar detector de Cara
-            move_x = dataFaceAcceleration.x;
-        }
-
+        
         //--------------
         if (justOne && speedUp)
         {
@@ -106,7 +85,7 @@ public class BallController : MonoBehaviour
             thrust = dataFaceAcceleration.y * 5;
 
         // Debug.Log("Aceleración: " + thrust);
-        Vector3 force = new Vector3(move_x, 0, 1) * thrust;
+        Vector3 force = new Vector3(moveX, 0, 1) * thrust;
 
         rb.AddForce(force);
 
@@ -162,60 +141,11 @@ public class BallController : MonoBehaviour
         {
             // Debug.Log(collision.gameObject.tag);
             // GameManager.singleton.EndGame(false);
-            close_python = true;
+            
+            
+            closePython = true;
             SceneManager.LoadScene("DeadMenu");
             // running = false;
-        }
-    }
-
-    public static Vector2 StringToArray(string WholeStringArray)
-    {
-        string[] sArray = WholeStringArray.Split(',');
-        Vector2 result = new Vector2(float.Parse(sArray[0]), float.Parse(sArray[1]));
-        return result;
-    }
-
-    void GetInfo()
-    {
-        localAdd = IPAddress.Parse(connectionIp);
-        listener = new TcpListener(IPAddress.Any, connectionpPort);
-        listener.Start();
-        client = listener.AcceptTcpClient();
-        running = true;
-        close_python = false;
-        while (running)
-            ReceiveData();
-
-
-        listener.Stop();
-        client.Close();
-    }
-
-    void ReceiveData()
-    {
-        NetworkStream networkStream = client.GetStream();
-        byte[] buffer = new byte[client.ReceiveBufferSize];
-
-        //Recibir datos desde el host
-        int byteRead = networkStream.Read(buffer, 0, client.ReceiveBufferSize);
-        string dataReceived = Encoding.UTF8.GetString(buffer, 0, byteRead);
-
-        if (dataReceived != null)
-        {
-            dataFaceAcceleration = StringToArray(dataReceived);
-            // Debug.Log("Nueva Aceleración: "+dataFaceAcceleration.y);
-        }
-
-        if (close_python)
-        {
-            byte[] myWriteBuffer = Encoding.ASCII.GetBytes("close");
-            networkStream.Write(myWriteBuffer, 0, myWriteBuffer.Length);
-            running = false;
-        }
-        else
-        {
-            byte[] myWriteBuffer = Encoding.ASCII.GetBytes("keep");
-            networkStream.Write(myWriteBuffer, 0, myWriteBuffer.Length);
         }
     }
 }

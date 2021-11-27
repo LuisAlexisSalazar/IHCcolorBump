@@ -286,23 +286,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 1
   flagKeyboard: 1
+  moveX: 0
   rb: {fileID: 2482094201068273108}
   wallDistance: 5
   minCamDistance: 3
+  closePython: 0
   speedUp: 0
   time: 0
-  fSpeed: 0
   justOne: 0
   bullet: {fileID: 136330, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
   shootForce: 10
   muzzleFlash: {fileID: 0}
   fcam: {fileID: 0}
   attackPoint: {fileID: 0}
-  allowInvoke: 1
-  objDestro:
-    serializedVersion: 2
-    m_Bits: 0
-  cam: {fileID: 0}
+  dataFaceAcceleration: {x: 0, y: 0}
 --- !u!114 &2482094201068273105
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - ShootCam
   - AttackPoint
+  - tagAudio
   layers:
   - Default
   - TransparentFX

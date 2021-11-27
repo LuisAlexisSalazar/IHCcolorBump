@@ -15,10 +15,6 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    void Update()
-    {
-    }
-
     //Conectar al servidor
     public override void OnConnectedToMaster()
     {
@@ -42,24 +38,37 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
         if (existBall)
         {
             Debug.Log("Jugador 2 debe controlar balon 1");
-            PhotonNetwork.Instantiate("MovSecondPlayer", new Vector3(-0.2f, -0.15f, 2.41f),
-                Quaternion.identity);
+            // PhotonNetwork.Instantiate("MovSecondPlayer", new Vector3(-0.2f, -0.15f, 2.41f),
+            //     Quaternion.identity);
             // MovSecondPlayer
-            PhotonNetwork.Instantiate("controlPlayerOne", new Vector3(-0.2f, -0.15f, 2.41f),
+            // PhotonNetwork.Instantiate("controlPlayerOne", new Vector3(-0.2f, -0.15f, 2.41f),
+            //     Quaternion.identity);
+            GameObject Control2 = PhotonNetwork.Instantiate("control",
+                new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
+
+            Control ControlPlayer2 = Control2.GetComponent<Control>();
+            ControlPlayer2.UserID = 2;
+            ControlPlayer2.connectionpPort = 50002;
         }
 
         else
         {
+            Debug.Log("Jugador 1 Creación del Balon");
             // Objeto de la carpeta resources , dodne se instanciara
             PhotonNetwork.Instantiate("SplitMetalBall", new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
-            
+
             PhotonNetwork.Instantiate("controlAudio", new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
-            
-            PhotonNetwork.Instantiate("controlPlayerOne", new Vector3(-0.2f, -0.15f, 2.41f),
+
+            GameObject Control1 = PhotonNetwork.Instantiate("control",
+                new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
+
+            Control ControlPlayer1 = Control1.GetComponent<Control>();
+            ControlPlayer1.UserID = 1;
+            ControlPlayer1.connectionpPort = 50001;
         }
     }
 }
