@@ -49,14 +49,15 @@ public class Control : MonoBehaviour
         // }
         // Conexión a python con otro thread
 
-        keywordRecognizerSpeech =
-            GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
-
         switch (UserID)
         {
             case 2:
+            {
+                keywordRecognizerSpeech =
+                    GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
                 keywordRecognizerSpeech.keywordRecognizer.Stop();
                 break;
+            }
 
             case 1:
             {
