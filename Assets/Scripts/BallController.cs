@@ -1,15 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Content;
-using UnityEngine.Windows.Speech;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Linq;
-using UnityEditor;
-using UnityEngine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
@@ -30,21 +22,17 @@ public class BallController : MonoBehaviour
 
     [SerializeField]
     //objeto que controla la posición
-    private Rigidbody rb;
+    public Rigidbody rb;
 
 
     //!Eliminar para que no tengamos parecdes invisibles
     [SerializeField] private float wallDistance = 5f;
     [SerializeField] private float minCamDistance = 3f;
 
-    KeywordRecognizer keywordRecognizer;
-    Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
-
 
     //SpeedUp
     public bool speedUp;
     public float time = 0f;
-    public float fSpeed = 0;
     public bool justOne = false;
 
     //BULLET
@@ -52,9 +40,6 @@ public class BallController : MonoBehaviour
 
     //BULLETFORCE
     public float shootForce;
-
-    /*//GUN STATS
-    public float timeBetweeShooting;*/
 
     //GRAPHICS
 
@@ -66,18 +51,9 @@ public class BallController : MonoBehaviour
     //CAMARA
     public Camera fcam;
     public Transform attackPoint;
-    public bool allowInvoke = true;
-    public LayerMask objDestro;
+
 
     //VOICE
-
-
-    //LA BALA
-    public GameObject cam;
-
-    //public Transform cam;
-    //lic LayerMask objDestro;
-
     //!Conexción con python
     private Thread mThread;
     private string connectionIp = "127.0.0.1";
@@ -93,26 +69,11 @@ public class BallController : MonoBehaviour
     void Start()
     {
         speedUp = false;
-        PV = GetComponent<PhotonView>();
-        //SUBE,ARRIBA,SALTA
-        // keywords.Add("sube", Jump);
-        keywords.Add("sube", Jump);
-        keywords.Add("dispara", fire);
-        keywords.Add("turbo", Nitro);
-        keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
-        keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
-        keywordRecognizer.Start();
 
         // Conexión a python con otro thread
         ThreadStart ts = new ThreadStart(GetInfo);
         mThread = new Thread(ts);
         mThread.Start();
-    }
-
-    private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
-    {
-        Debug.Log(args.text);
-        keywords[args.text].Invoke();
     }
 
 
@@ -165,105 +126,6 @@ public class BallController : MonoBehaviour
     }
 
 
-    public void Nitro()
-    {
-        PV.RPC("realityNitro", RpcTarget.All);
-    }
-    
-    [PunRPC]
-    public void realityNitro()
-    {
-        Debug.Log("Nitro");
-        speedUp = true;
-        justOne = true;
-    }
-
-
-    void Jump()
-    {
-        PV.RPC("realityJump", RpcTarget.All);
-    }
-
-    [PunRPC]
-    void realityJump()
-    {
-        Debug.Log("JUMP");
-        rb.AddForce(0, 15, 0, ForceMode.Impulse);
-    }
-
-    private void fire()
-    {
-        Debug.Log("FIRE");
-        PV.RPC("Shoot", RpcTarget.All);
-        // Shoot();
-    }
-
-    [PunRPC]
-    private void Shoot()
-    {
-        if (fcam == null)
-        {
-            try
-            {
-                fcam = GameObject.FindGameObjectWithTag("ShootCam")
-                    .GetComponent<Camera>() as Camera;
-            }
-            catch (NullReferenceException)
-            {
-                fcam = null;
-                return;
-            }
-        }
-
-        if (attackPoint == null)
-        {
-            try
-            {
-                attackPoint = GameObject.FindGameObjectWithTag("AttackPoint").transform;
-            }
-            catch (NullReferenceException)
-            {
-                attackPoint = null;
-                return;
-            }
-        }
-
-
-        //LA DIRECCION DE LA CAMARA
-        Ray ray = fcam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-        Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit))
-        {
-            targetPoint = hit.point;
-        }
-        else
-        {
-            targetPoint = ray.GetPoint(75);
-        }
-
-
-        Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
-
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
-
-        //FORCE TO THE BULLET
-        Debug.Log(directionWithoutSpread);
-        /*if(directionWithoutSpread.z > 5)
-        {
-            directionWithoutSpread = new Vector3(directionWithoutSpread.x, directionWithoutSpread.y, directionWithoutSpread.z % 5);
-        }
-        Vector3 unit = new Vector3(0.0f, 0.0f, 1f);*/
-        currentBullet.GetComponent<Rigidbody>()
-            .AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
-        GameObject.Destroy(currentBullet, 3f);
-
-        if (muzzleFlash != null)
-        {
-            Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
-        }
-    }
-
     //!Paredes invisibles (proximamente Quitar)
     private void LateUpdate()
     {
@@ -295,7 +157,8 @@ public class BallController : MonoBehaviour
         if (GameManager.singleton.GameEnded)
             return;
 
-        if (collision.gameObject.tag == "Death")
+        // if (collision.gameObject.tag == "Death")
+        if (collision.gameObject.CompareTag("Death"))
         {
             // Debug.Log(collision.gameObject.tag);
             // GameManager.singleton.EndGame(false);

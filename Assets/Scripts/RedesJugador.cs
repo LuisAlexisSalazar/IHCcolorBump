@@ -6,7 +6,7 @@ using Photon.Pun;
 public class RedesJugador : MonoBehaviour
 {
     public MonoBehaviour[] codigosQueIgnorar;
-    
+
     private PhotonView photonView;
 
     void Start()
@@ -20,5 +20,4 @@ public class RedesJugador : MonoBehaviour
             }
         }
     }
-
 }

@@ -45,12 +45,20 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate("MovSecondPlayer", new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
             // MovSecondPlayer
+            PhotonNetwork.Instantiate("controlPlayerOne", new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
         }
 
         else
         {
             // Objeto de la carpeta resources , dodne se instanciara
             PhotonNetwork.Instantiate("SplitMetalBall", new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
+            
+            PhotonNetwork.Instantiate("controlAudio", new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
+            
+            PhotonNetwork.Instantiate("controlPlayerOne", new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
         }
     }
