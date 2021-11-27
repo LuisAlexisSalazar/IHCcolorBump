@@ -74,11 +74,20 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        DistanceLeft = Vector3.Distance(ball.transform.position, goalTransform.position);
-        if (DistanceLeft > EntireDistance)
-            DistanceLeft = EntireDistance;
-        if (ball.transform.position.z > goalTransform.transform.position.z)
-            DistanceLeft = 0;
+        try
+        {
+            ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallController>();
+            DistanceLeft = Vector3.Distance(ball.transform.position, goalTransform.position);
+            if (DistanceLeft > EntireDistance)
+                DistanceLeft = EntireDistance;
+            if (ball.transform.position.z > goalTransform.transform.position.z)
+                DistanceLeft = 0;
+        }
+        catch (NullReferenceException)
+        {
+            ball = null;
+        }
+
 
         // Debug.Log(
         //     "Distancia Recorrido es " + DistanceLeft + " Distance entera es " + EntireDistance);

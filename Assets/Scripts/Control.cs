@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine.Windows.Speech;
 
 public class Control : MonoBehaviour
@@ -11,11 +12,11 @@ public class Control : MonoBehaviour
     public bool flagKeyboard = false;
     public int UserID;
 
+    private BallController Ball;
+    private GameManager ManagerGame;
 
     //VOICE
     ControlAudio keywordRecognizerSpeech;
-
-    private BallController Ball;
 
 
     //VOICE
@@ -35,11 +36,14 @@ public class Control : MonoBehaviour
     private bool running;
     // private bool closePython;
 
+    private bool statusChange = false;
+    private bool listenCamera = true;
+    private bool closeCamera = true;
 
     void Start()
     {
         Ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallController>();
-
+        ManagerGame = GameObject.FindGameObjectWithTag("gameManager").GetComponent<GameManager>();
         //---------------------
         // foreach (var device in Microphone.devices)
         // {
@@ -48,6 +52,7 @@ public class Control : MonoBehaviour
         //     Microphone.Start(device.ToString(), true, 50, AudioSettings.outputSampleRate);
         // }
         // Conexión a python con otro thread
+
 
         switch (UserID)
         {
@@ -61,10 +66,9 @@ public class Control : MonoBehaviour
 
             case 1:
             {
-                // keywordRecognizerSpeech =
-                //     GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
-                // keywordRecognizerSpeech.keywordRecognizer.Stop();
-
+                keywordRecognizerSpeech =
+                    GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+                
                 ThreadStart ts = new ThreadStart(GetInfo);
                 mThread = new Thread(ts);
                 mThread.Start();
@@ -91,22 +95,75 @@ public class Control : MonoBehaviour
             }
         }
         */
+        float travelDistance =
+            GameManager.singleton.EntireDistance - GameManager.singleton.DistanceLeft;
+        float value = travelDistance / GameManager.singleton.EntireDistance;
 
-
-        if (UserID == 2)
+        if (value >= 0.5 && !statusChange)
         {
-            // !Window.Speech
-            switch (keywordRecognizerSpeech.keywordRecognizer.IsRunning)
-            {
-                case true when Input.GetKeyDown(KeyCode.Space):
-                    keywordRecognizerSpeech.keywordRecognizer.Stop();
-                    Debug.Log("Silenciar");
-                    break;
-                case false when Input.GetKeyDown(KeyCode.Space):
-                    keywordRecognizerSpeech.keywordRecognizer.Start();
-                    Debug.Log("Iniciar Microfono");
-                    break;
-            }
+            statusChange = true;
+        }
+
+
+        switch (UserID)
+        {
+            // Debug.Log(travelDistance);
+            // Debug.Log(value);
+            case 2:
+
+                if (statusChange)
+                {
+                    if (listenCamera)
+                    {
+                        ThreadStart ts = new ThreadStart(GetInfo);
+                        mThread = new Thread(ts);
+                        mThread.Start();
+                        listenCamera = false;
+                    }
+                }
+                else
+                {
+                    // !Window.Speech
+                    switch (keywordRecognizerSpeech.keywordRecognizer.IsRunning)
+                    {
+                        case true when Input.GetKeyDown(KeyCode.Space):
+                            keywordRecognizerSpeech.keywordRecognizer.Stop();
+                            Debug.Log("Silenciar");
+                            break;
+                        case false when Input.GetKeyDown(KeyCode.Space):
+                            keywordRecognizerSpeech.keywordRecognizer.Start();
+                            Debug.Log("Iniciar Microfono");
+                            break;
+                    }
+                }
+
+                break;
+
+            case 1:
+
+                if (statusChange)
+                {
+                    if (closeCamera)
+                    {
+                        listener.Stop();
+                        client.Close();
+                        closeCamera = false;
+                    }
+
+                    switch (keywordRecognizerSpeech.keywordRecognizer.IsRunning)
+                    {
+                        case true when Input.GetKeyDown(KeyCode.Space):
+                            keywordRecognizerSpeech.keywordRecognizer.Stop();
+                            Debug.Log("Silenciar");
+                            break;
+                        case false when Input.GetKeyDown(KeyCode.Space):
+                            keywordRecognizerSpeech.keywordRecognizer.Start();
+                            Debug.Log("Iniciar Microfono");
+                            break;
+                    }
+                }
+
+                break;
         }
 
 

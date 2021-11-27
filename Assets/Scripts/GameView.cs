@@ -18,7 +18,8 @@ public class GameView : MonoBehaviour
         float travelDistance =
             GameManager.singleton.EntireDistance - GameManager.singleton.DistanceLeft;
         float value = travelDistance / GameManager.singleton.EntireDistance;
-
+        
+        // Debug.Log(value);
         if (GameManager.singleton.gameObject && value < lastValue)
             return;
         
