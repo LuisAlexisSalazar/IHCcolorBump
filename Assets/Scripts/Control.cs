@@ -28,7 +28,9 @@ public class Control : MonoBehaviour
     public int connectionpPort;
     private IPAddress localAdd;
     private TcpClient client;
+
     private TcpListener listener;
+
     // private Vector2 dataFaceAcceleration = Vector2.zero;
     private bool running;
     // private bool closePython;
@@ -47,20 +49,21 @@ public class Control : MonoBehaviour
         // }
         // Conexión a python con otro thread
 
+        keywordRecognizerSpeech =
+            GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+
         switch (UserID)
         {
             case 2:
-                keywordRecognizerSpeech =
-                    GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
-                // keywordRecognizerSpeech.keywordRecognizer.Stop();
+                keywordRecognizerSpeech.keywordRecognizer.Stop();
                 break;
 
             case 1:
             {
-                keywordRecognizerSpeech =
-                    GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
-                keywordRecognizerSpeech.keywordRecognizer.Stop();
-                
+                // keywordRecognizerSpeech =
+                //     GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+                // keywordRecognizerSpeech.keywordRecognizer.Stop();
+
                 ThreadStart ts = new ThreadStart(GetInfo);
                 mThread = new Thread(ts);
                 mThread.Start();
