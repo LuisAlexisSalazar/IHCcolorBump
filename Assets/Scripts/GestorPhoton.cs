@@ -43,7 +43,7 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
             // MovSecondPlayer
             // PhotonNetwork.Instantiate("controlPlayerOne", new Vector3(-0.2f, -0.15f, 2.41f),
             //     Quaternion.identity);
-            GameObject Control2 = PhotonNetwork.Instantiate("control",
+            GameObject Control2 = PhotonNetwork.Instantiate("control2",
                 new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
 
