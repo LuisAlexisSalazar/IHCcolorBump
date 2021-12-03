@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Threading;
 using System.Net;
@@ -17,7 +18,7 @@ public class Control2 : MonoBehaviour
 
     //VOICE
     ControlAudio keywordRecognizerSpeech;
-
+    private bool statusFindTagAudio = false;
 
     //VOICE
     //!Conexción con python
@@ -43,13 +44,36 @@ public class Control2 : MonoBehaviour
         ManagerGame = GameObject.FindGameObjectWithTag("gameManager").GetComponent<GameManager>();
 
 
-        keywordRecognizerSpeech =
-            GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
-        keywordRecognizerSpeech.keywordRecognizer.Stop();
+        try
+        {
+            keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+            keywordRecognizerSpeech.keywordRecognizer.Stop();
+            statusFindTagAudio = true;
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("No se encontro el obejto de audio");
+        }
+        
     }
 
     void Update()
     {
+        if (!statusFindTagAudio)
+        {
+            try
+            {
+                keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+                // keywordRecognizerSpeech.keywordRecognizer.Stop();
+                Debug.Log("Se encontro el obejto");
+            }
+            catch (NullReferenceException)
+            {
+                Debug.Log("No se encontro el obejto");
+            }
+        }
+        
+        
         float travelDistance =
             GameManager.singleton.EntireDistance - GameManager.singleton.DistanceLeft;
         float value = travelDistance / GameManager.singleton.EntireDistance;

@@ -55,8 +55,7 @@ public class Control : MonoBehaviour
         // Conexión a python con otro thread
 
 
-        keywordRecognizerSpeech =
-            GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+        // keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
 
         ThreadStart ts = new ThreadStart(GetInfo);
         mThread = new Thread(ts);
@@ -95,6 +94,7 @@ public class Control : MonoBehaviour
         }
         
         Ball.moveX = flagKeyboard ? Input.GetAxis("Horizontal") : Ball.dataFaceAcceleration.x;
+        // Debug.Log("Dirección"+Ball.dataFaceAcceleration.x);
     }
 
 
@@ -126,7 +126,7 @@ public class Control : MonoBehaviour
         if (dataReceived != null)
         {
             Ball.dataFaceAcceleration = StringToArray(dataReceived);
-            // Debug.Log("Nueva Aceleración: "+dataFaceAcceleration.y);
+            Debug.Log("Nueva Aceleración: "+ Ball.dataFaceAcceleration .y);
         }
 
         if (Ball.closePython || closeCamera)
