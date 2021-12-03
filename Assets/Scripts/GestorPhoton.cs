@@ -118,6 +118,24 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
         }
     }*/
 
+
+    public void Join()
+    {
+
+        PhotonNetwork.JoinRandomRoom();
+        Debug.Log("Se unio a la sala exitosamente");
+        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+        //Debug.Log(PhotonNetwork.CurrentRoom.numrt)
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log("Error !  No se pudo usar");
+        Join();
+    }
+
+
+
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         Debug.Log("Erro ! Sala no creada");

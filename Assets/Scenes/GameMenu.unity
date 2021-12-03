@@ -707,8 +707,8 @@ MonoBehaviour:
           m_StringArgument: RoomWhite
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1717012543}
-        m_TargetAssemblyTypeName: Unirse_sala, Assembly-CSharp
+      - m_Target: {fileID: 1624392265}
+        m_TargetAssemblyTypeName: GestorPhoton, Assembly-CSharp
         m_MethodName: Join
         m_Mode: 1
         m_Arguments:
@@ -1378,7 +1378,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1717012541
+--- !u!1 &1624392264
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1386,41 +1386,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1717012542}
-  - component: {fileID: 1717012543}
+  - component: {fileID: 1624392266}
+  - component: {fileID: 1624392265}
   m_Layer: 0
-  m_Name: Join_Room1
+  m_Name: Join_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1717012542
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717012541}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8744764, y: -1.3466579, z: 5.8425946}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1717012543
+--- !u!114 &1624392265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717012541}
+  m_GameObject: {fileID: 1624392264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d114a0b7bc1558f4593f87315c5ea12f, type: 3}
+  m_Script: {fileID: 11500000, guid: 98497e32c51c98d44bfddada141bdc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1624392266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624392264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.269795, y: -2.3674905, z: 484.75067}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1830276889
 GameObject:
   m_ObjectHideFlags: 0
