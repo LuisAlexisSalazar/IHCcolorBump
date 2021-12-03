@@ -35,7 +35,7 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
 
         //PhotonNetwork.LeaveRoom();
         //PhotonNetwork.LeaveLobby();
-        PhotonNetwork.JoinOrCreateRoom("Room: " + numero, new RoomOptions() { MaxPlayers = 2 }, TypedLobby.Default);
+        //PhotonNetwork.JoinOrCreateRoom("Room: " + numero, new RoomOptions() { MaxPlayers = 2 }, TypedLobby.Default);
         Debug.Log("Sala Creada");
         /*PhotonNetwork.JoinOrCreateRoom("Cuarto", new RoomOptions {MaxPlayers = 2},
             TypedLobby.Default);*/
