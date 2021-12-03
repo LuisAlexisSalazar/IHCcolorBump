@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
+
 
 public class GestorPhoton : MonoBehaviourPunCallbacks
 {
     private bool existBall = false;
+    TextMeshProUGUI scoreText;
+    private int player_count;
 
     void Start()
     {
@@ -35,6 +39,40 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
         Debug.Log("Sala Creada");
         /*PhotonNetwork.JoinOrCreateRoom("Cuarto", new RoomOptions {MaxPlayers = 2},
             TypedLobby.Default);*/
+    }
+
+    public override void OnJoinedRoom()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+            existBall = true;
+
+        if(existBall)
+        {
+            scoreText = GameObject.FindGameObjectWithTag("text1").GetComponent<TextMeshProUGUI>();
+
+        }
+    }
+
+    void Update()
+    {
+        try 
+        {
+            player_count = PhotonNetwork.CurrentRoom.PlayerCount;
+        }
+        catch
+        {
+            Debug.Log("Player count");
+        }
+        //player_count = PhotonNetwork.CurrentRoom.PlayerCount;
+
+        try {
+            scoreText.text = player_count.ToString();
+        }// make it a string to output to the Text object
+        catch 
+        {
+            Debug.Log("Buscando el objeto");
+        }
+
     }
 
     //Que va ocurrir cuando nos unamos al cuarto

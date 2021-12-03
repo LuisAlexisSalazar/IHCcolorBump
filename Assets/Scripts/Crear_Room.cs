@@ -23,7 +23,7 @@ public class Crear_Room : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
         OnConnectedToMaster();
 
-        numero = Random.Range(1,100);
+        numero = 1;
         Debug.Log("Intentando crear sala");
         
         //PhotonNetwork.LeaveRoom();

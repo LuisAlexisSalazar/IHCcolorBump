@@ -14,6 +14,7 @@ TagManager:
   - AttackPoint
   - tagAudio
   - gameManager
+  - text1
   layers:
   - Default
   - TransparentFX
