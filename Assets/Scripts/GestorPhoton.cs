@@ -11,7 +11,11 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
 {
     private bool existBall = false;
     TextMeshProUGUI scoreText;
+    /*TextMeshProUGUI nameText;
+    image;*/
     private int player_count;
+    bool two_players = false;
+    bool isDestroy = false;
 
     void Start()
     {
@@ -47,6 +51,14 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
             existBall = true;
 
+        //Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+       /* if(PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        {
+            Debug.Log("H");
+            two_players = true;
+        }*/
+
+
         if(existBall)
         {
             scoreText = GameObject.FindGameObjectWithTag("text1").GetComponent<TextMeshProUGUI>();
@@ -56,9 +68,14 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
 
     void Update()
     {
+
         try 
         {
             player_count = PhotonNetwork.CurrentRoom.PlayerCount;
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
+                two_players = true;
+            }
         }
         catch
         {
@@ -66,14 +83,41 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
         }
         //player_count = PhotonNetwork.CurrentRoom.PlayerCount;
 
-        try {
-            scoreText.text = player_count.ToString();
-        }// make it a string to output to the Text object
-        catch 
+        if(!isDestroy)
         {
-            Debug.Log("Buscando el objeto");
+            try
+            {
+                scoreText.text = player_count.ToString();
+                //Debug.Log("Destroyed");
+                //Debug.Log(two_players);
+                if (two_players)
+                {
+                    isDestroy = true;
+                }
+            }// make it a string to output to the Text object
+            catch
+            {
+                Debug.Log("Buscando el objeto");
+            }
         }
+        else
+        {
+            StartCoroutine(waiter());
+        }
+        
 
+    }
+    IEnumerator waiter()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        GameObject title = GameObject.FindGameObjectWithTag("text0");
+        Destroy(title);
+        //yield return new WaitForSecondsRealtime(1);
+        title = GameObject.FindGameObjectWithTag("text00");
+        Destroy(title);
+        //yield return new WaitForSecondsRealtime(1);
+        title = GameObject.FindGameObjectWithTag("text1");
+        Destroy(title);
     }
 
     //Que va ocurrir cuando nos unamos al cuarto
