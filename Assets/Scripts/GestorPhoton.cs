@@ -10,6 +10,7 @@ using TMPro;
 public class GestorPhoton : MonoBehaviourPunCallbacks
 {
     private bool existBall = false;
+    private bool existBall2 = false;
     TextMeshProUGUI scoreText;
     /*TextMeshProUGUI nameText;
     image;*/
@@ -50,19 +51,42 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
             existBall = true;
-
-        //Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-       /* if(PhotonNetwork.CurrentRoom.PlayerCount > 1)
-        {
-            Debug.Log("H");
-            two_players = true;
-        }*/
-
-
         if(existBall)
         {
             scoreText = GameObject.FindGameObjectWithTag("text1").GetComponent<TextMeshProUGUI>();
+        }
 
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            existBall2 = true;
+
+        if (existBall2)
+        {
+            Debug.Log("Jugador 2 debe controlar balon 1");
+            GameObject Control2 = PhotonNetwork.Instantiate("control",
+                new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
+
+            Control ControlPlayer2 = Control2.GetComponent<Control>();
+            ControlPlayer2.UserID = 2;
+            ControlPlayer2.connectionpPort = 50002;
+        }
+        else
+        {
+            Debug.Log("Jugador 1 Creación del Balon");
+            // Objeto de la carpeta resources , dodne se instanciara
+            PhotonNetwork.Instantiate("SplitMetalBall", new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
+
+            PhotonNetwork.Instantiate("controlAudio", new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
+
+            GameObject Control1 = PhotonNetwork.Instantiate("control",
+                new Vector3(-0.2f, -0.15f, 2.41f),
+                Quaternion.identity);
+
+            Control ControlPlayer1 = Control1.GetComponent<Control>();
+            ControlPlayer1.UserID = 1;
+            ControlPlayer1.connectionpPort = 50001;
         }
     }
 
