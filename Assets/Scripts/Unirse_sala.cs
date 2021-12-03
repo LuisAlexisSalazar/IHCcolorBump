@@ -17,7 +17,7 @@ public class Unirse_sala : MonoBehaviourPunCallbacks
         
         PhotonNetwork.JoinRandomRoom();
         Debug.Log("Se unio a la sala exitosamente");
-        Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
+        //Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
         //Debug.Log(PhotonNetwork.CurrentRoom.numrt)
     }
 

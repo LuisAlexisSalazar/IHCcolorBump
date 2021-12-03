@@ -25,12 +25,20 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         //Unirse a un room ya creado o creara el room si no existe
-        PhotonNetwork.JoinOrCreateRoom("Cuarto", new RoomOptions {MaxPlayers = 2},
-            TypedLobby.Default);
+        int numero;
+        numero = UnityEngine.Random.Range(1, 100);
+        Debug.Log("Intentando crear sala");
+
+        //PhotonNetwork.LeaveRoom();
+        //PhotonNetwork.LeaveLobby();
+        PhotonNetwork.JoinOrCreateRoom("Room: " + numero, new RoomOptions() { MaxPlayers = 2 }, TypedLobby.Default);
+        Debug.Log("Sala Creada");
+        /*PhotonNetwork.JoinOrCreateRoom("Cuarto", new RoomOptions {MaxPlayers = 2},
+            TypedLobby.Default);*/
     }
 
     //Que va ocurrir cuando nos unamos al cuarto
-    public override void OnJoinedRoom()
+    /*public override void OnJoinedRoom()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
             existBall = true;
@@ -70,5 +78,13 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
             ControlPlayer1.UserID = 1;
             ControlPlayer1.connectionpPort = 50001;
         }
+    }*/
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Erro ! Sala no creada");
+        OnJoinedLobby();
+        //base.OnCreateRoomFailed(returnCode, "Error no se pudo crear la sala");
     }
+
 }
