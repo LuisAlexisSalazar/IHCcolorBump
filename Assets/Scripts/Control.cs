@@ -10,7 +10,7 @@ using UnityEngine.Windows.Speech;
 public class Control : MonoBehaviour
 {
     public bool flagKeyboard = false;
-    public int UserID;
+    public int UserID = 1;
 
     private BallController Ball;
     private GameManager ManagerGame;
@@ -25,8 +25,9 @@ public class Control : MonoBehaviour
 
     private string connectionIp = "127.0.0.1";
 
-    // private int connectionpPort = 50001;
-    public int connectionpPort;
+    private int connectionpPort = 50001;
+
+    // public int connectionpPort;
     private IPAddress localAdd;
     private TcpClient client;
 
@@ -38,7 +39,7 @@ public class Control : MonoBehaviour
 
     private bool statusChange = false;
     private bool listenCamera = true;
-    private bool closeCamera = true;
+    private bool closeCamera = false;
 
     void Start()
     {
@@ -54,28 +55,14 @@ public class Control : MonoBehaviour
         // Conexión a python con otro thread
 
 
-        switch (UserID)
-        {
-            case 2:
-            {
-                keywordRecognizerSpeech =
-                    GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
-                keywordRecognizerSpeech.keywordRecognizer.Stop();
-                break;
-            }
+        keywordRecognizerSpeech =
+            GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
 
-            case 1:
-            {
-                keywordRecognizerSpeech =
-                    GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
-                
-                ThreadStart ts = new ThreadStart(GetInfo);
-                mThread = new Thread(ts);
-                mThread.Start();
-                break;
-            }
-        }
+        ThreadStart ts = new ThreadStart(GetInfo);
+        mThread = new Thread(ts);
+        mThread.Start();
     }
+
 
     void Update()
     {
@@ -95,6 +82,7 @@ public class Control : MonoBehaviour
             }
         }
         */
+        
         float travelDistance =
             GameManager.singleton.EntireDistance - GameManager.singleton.DistanceLeft;
         float value = travelDistance / GameManager.singleton.EntireDistance;
@@ -102,71 +90,10 @@ public class Control : MonoBehaviour
         if (value >= 0.5 && !statusChange)
         {
             statusChange = true;
+            closeCamera = true;
+            Debug.Log("Cambio de Controles del jugador 1");
         }
-
-
-        switch (UserID)
-        {
-            // Debug.Log(travelDistance);
-            // Debug.Log(value);
-            case 2:
-
-                if (statusChange)
-                {
-                    if (listenCamera)
-                    {
-                        ThreadStart ts = new ThreadStart(GetInfo);
-                        mThread = new Thread(ts);
-                        mThread.Start();
-                        listenCamera = false;
-                    }
-                }
-                else
-                {
-                    // !Window.Speech
-                    switch (keywordRecognizerSpeech.keywordRecognizer.IsRunning)
-                    {
-                        case true when Input.GetKeyDown(KeyCode.Space):
-                            keywordRecognizerSpeech.keywordRecognizer.Stop();
-                            Debug.Log("Silenciar");
-                            break;
-                        case false when Input.GetKeyDown(KeyCode.Space):
-                            keywordRecognizerSpeech.keywordRecognizer.Start();
-                            Debug.Log("Iniciar Microfono");
-                            break;
-                    }
-                }
-
-                break;
-
-            case 1:
-
-                if (statusChange)
-                {
-                    if (closeCamera)
-                    {
-                        listener.Stop();
-                        client.Close();
-                        closeCamera = false;
-                    }
-
-                    switch (keywordRecognizerSpeech.keywordRecognizer.IsRunning)
-                    {
-                        case true when Input.GetKeyDown(KeyCode.Space):
-                            keywordRecognizerSpeech.keywordRecognizer.Stop();
-                            Debug.Log("Silenciar");
-                            break;
-                        case false when Input.GetKeyDown(KeyCode.Space):
-                            keywordRecognizerSpeech.keywordRecognizer.Start();
-                            Debug.Log("Iniciar Microfono");
-                            break;
-                    }
-                }
-
-                break;
-        }
-
-
+        
         Ball.moveX = flagKeyboard ? Input.GetAxis("Horizontal") : Ball.dataFaceAcceleration.x;
     }
 
@@ -202,7 +129,7 @@ public class Control : MonoBehaviour
             // Debug.Log("Nueva Aceleración: "+dataFaceAcceleration.y);
         }
 
-        if (Ball.closePython)
+        if (Ball.closePython || closeCamera)
         {
             byte[] myWriteBuffer = Encoding.ASCII.GetBytes("close");
             networkStream.Write(myWriteBuffer, 0, myWriteBuffer.Length);

@@ -62,13 +62,11 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
         if (existBall2)
         {
             Debug.Log("Jugador 2 debe controlar balon 1");
-            GameObject Control2 = PhotonNetwork.Instantiate("control",
+            // GameObject Control2 = 
+            PhotonNetwork.Instantiate("control2",
                 new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
 
-            Control ControlPlayer2 = Control2.GetComponent<Control>();
-            ControlPlayer2.UserID = 2;
-            ControlPlayer2.connectionpPort = 50002;
         }
         else
         {
@@ -80,13 +78,10 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate("controlAudio", new Vector3(-0.2f, -0.15f, 2.41f),
                 Quaternion.identity);
 
-            GameObject Control1 = PhotonNetwork.Instantiate("control",
-                new Vector3(-0.2f, -0.15f, 2.41f),
-                Quaternion.identity);
+            // GameObject Control1 =
+            PhotonNetwork.Instantiate("control",
+                new Vector3(-0.2f, -0.15f, 2.41f), Quaternion.identity);
 
-            Control ControlPlayer1 = Control1.GetComponent<Control>();
-            ControlPlayer1.UserID = 1;
-            ControlPlayer1.connectionpPort = 50001;
         }
     }
 
