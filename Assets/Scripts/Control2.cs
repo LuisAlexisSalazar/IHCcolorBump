@@ -19,8 +19,7 @@ public class Control2 : MonoBehaviour
     //VOICE
     ControlAudio keywordRecognizerSpeech;
     private bool statusFindTagAudio = false;
-
-    //VOICE
+    
     //!Conexción con python
     // private Thread mThread;
 
@@ -83,7 +82,9 @@ public class Control2 : MonoBehaviour
             statusChange = true;
             Debug.Log("Cambio de Controles del jugador 2");
         }
-
+        
+        
+        //---------Activate o Deactivate Dictionary of Events with voice-------
         switch (keywordRecognizerSpeech.keywordRecognizer.IsRunning)
         {
             case true when Input.GetKeyDown(KeyCode.Space):

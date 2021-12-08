@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Threading;
 using System.Net;
@@ -17,9 +18,8 @@ public class Control : MonoBehaviour
 
     //VOICE
     ControlAudio keywordRecognizerSpeech;
+    private bool statusFindTagAudio = false;
 
-
-    //VOICE
     //!Conexción con python
     private Thread mThread;
 
@@ -55,7 +55,18 @@ public class Control : MonoBehaviour
         // Conexión a python con otro thread
 
 
-        // keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+        try
+        {
+            keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio")
+                .GetComponent<ControlAudio>();
+            keywordRecognizerSpeech.keywordRecognizer.Stop();
+            statusFindTagAudio = true;
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("No se encontro el obejto de audio");
+        }
+
 
         ThreadStart ts = new ThreadStart(GetInfo);
         mThread = new Thread(ts);
@@ -81,7 +92,25 @@ public class Control : MonoBehaviour
             }
         }
         */
+
+        //----------Microphone------
+        if (!statusFindTagAudio)
+        {
+            try
+            {
+                keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+                Debug.Log("Se encontro el obejto");
+            }
+            catch (NullReferenceException)
+            {
+                Debug.Log("No se encontro el obejto");
+            }
+        }
+        //--------------------------------------------------
         
+        
+        
+        //-------------Python Camera----------
         float travelDistance =
             GameManager.singleton.EntireDistance - GameManager.singleton.DistanceLeft;
         float value = travelDistance / GameManager.singleton.EntireDistance;
@@ -92,7 +121,7 @@ public class Control : MonoBehaviour
             closeCamera = true;
             Debug.Log("Cambio de Controles del jugador 1");
         }
-        
+
         Ball.moveX = flagKeyboard ? Input.GetAxis("Horizontal") : Ball.dataFaceAcceleration.x;
         // Debug.Log("Dirección"+Ball.dataFaceAcceleration.x);
     }
@@ -126,7 +155,7 @@ public class Control : MonoBehaviour
         if (dataReceived != null)
         {
             Ball.dataFaceAcceleration = StringToArray(dataReceived);
-            Debug.Log("Nueva Aceleración: "+ Ball.dataFaceAcceleration .y);
+            Debug.Log("Nueva Aceleración: " + Ball.dataFaceAcceleration.y);
         }
 
         if (Ball.closePython || closeCamera)
