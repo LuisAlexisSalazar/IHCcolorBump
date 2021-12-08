@@ -61,6 +61,7 @@ public class Control : MonoBehaviour
                 .GetComponent<ControlAudio>();
             keywordRecognizerSpeech.keywordRecognizer.Stop();
             statusFindTagAudio = true;
+            Debug.Log("Se encontro el Dictionario del U 1");
         }
         catch (NullReferenceException)
         {
@@ -99,7 +100,7 @@ public class Control : MonoBehaviour
             try
             {
                 keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
-                Debug.Log("Se encontro el obejto");
+                Debug.Log("Se encontro el Dictionario del U 1");
             }
             catch (NullReferenceException)
             {
