@@ -133,7 +133,7 @@ public class Control : MonoBehaviour
                 GameManager.singleton.EntireDistance - GameManager.singleton.DistanceLeft;
             float value = travelDistance / GameManager.singleton.EntireDistance;
 
-            Debug.Log("Recorrido:"+value);
+            // Debug.Log("Recorrido:"+value);
 
             // if (value >= 0.5 && !statusChange)
             if (value >= 0.1 && !statusChange) //? fines didacticos "justo caundo caes a la rampa"
@@ -148,7 +148,7 @@ public class Control : MonoBehaviour
 
 
             Ball.moveX = flagKeyboard ? Input.GetAxis("Horizontal") : Ball.dataFaceAcceleration.x;
-            // Debug.Log("Dirección"+Ball.dataFaceAcceleration.x);
+            // Debug.Log("Dirección:" + Ball.dataFaceAcceleration.x);
         }
     }
 
@@ -181,7 +181,7 @@ public class Control : MonoBehaviour
         if (dataReceived != null)
         {
             Ball.dataFaceAcceleration = StringToArray(dataReceived);
-            // Debug.Log("Nueva Aceleración: " + Ball.dataFaceAcceleration.y);
+            Debug.Log("Nueva Aceleración del Jugador 1: " + Ball.dataFaceAcceleration.y);
         }
 
         if (Ball.closePython || closeCamera)

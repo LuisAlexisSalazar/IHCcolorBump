@@ -100,8 +100,8 @@ public class Control2 : MonoBehaviour
                 mThread = new Thread(ts);
                 mThread.Start();
             }
-            
-            
+
+
             //--Control Diccionario---
             switch (keywordRecognizerSpeech.keywordRecognizer.IsRunning)
             {
@@ -147,7 +147,7 @@ public class Control2 : MonoBehaviour
         if (dataReceived != null)
         {
             Ball.dataFaceAcceleration = StringToArray(dataReceived);
-            // Debug.Log("Nueva Aceleración: " + Ball.dataFaceAcceleration.y);
+            Debug.Log("Nueva Aceleración del Jugador 2: " + Ball.dataFaceAcceleration.y);
         }
 
         if (Ball.closePython || closeCamera)
