@@ -35,8 +35,6 @@ public class Control : MonoBehaviour
 
     // private Vector2 dataFaceAcceleration = Vector2.zero;
     private bool running;
-    // private bool closePython;
-
     private bool statusChange = false;
     private bool listenCamera = true;
     private bool closeCamera = false;
@@ -94,13 +92,16 @@ public class Control : MonoBehaviour
         }
         */
 
-        //----------Microphone------
+        //----------Find Dictionary of Microphone------
         if (!statusFindTagAudio)
         {
             try
             {
-                keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio").GetComponent<ControlAudio>();
+                keywordRecognizerSpeech = GameObject.FindGameObjectWithTag("tagAudio")
+                    .GetComponent<ControlAudio>();
+                // keywordRecognizerSpeech.keywordRecognizer.Start();
                 Debug.Log("Se encontro el Diccionario del U 1");
+                statusFindTagAudio = true;
             }
             catch (NullReferenceException)
             {
@@ -109,25 +110,46 @@ public class Control : MonoBehaviour
         }
         //--------------------------------------------------
 
-        Debug.Log("Estado de l Microfono:");
-        Debug.Log(keywordRecognizerSpeech.keywordRecognizer.IsRunning);
-        keywordRecognizerSpeech.keywordRecognizer.Start();
-        
-        
-        //-------------Python Camera----------
-        float travelDistance =
-            GameManager.singleton.EntireDistance - GameManager.singleton.DistanceLeft;
-        float value = travelDistance / GameManager.singleton.EntireDistance;
 
-        if (value >= 0.5 && !statusChange)
+        //?---------Only Switch de Controles-------
+        if (statusChange)
         {
-            statusChange = true;
-            closeCamera = true;
-            Debug.Log("Cambio de Controles del jugador 1");
+            switch (keywordRecognizerSpeech.keywordRecognizer.IsRunning)
+            {
+                case true when Input.GetKeyDown(KeyCode.Space):
+                    keywordRecognizerSpeech.keywordRecognizer.Stop();
+                    Debug.Log("Silenciar");
+                    break;
+                case false when Input.GetKeyDown(KeyCode.Space):
+                    keywordRecognizerSpeech.keywordRecognizer.Start();
+                    Debug.Log("Iniciar Microfono");
+                    break;
+            }
         }
+        else
+        {
+            //-------------Python Camera----------
+            float travelDistance =
+                GameManager.singleton.EntireDistance - GameManager.singleton.DistanceLeft;
+            float value = travelDistance / GameManager.singleton.EntireDistance;
 
-        Ball.moveX = flagKeyboard ? Input.GetAxis("Horizontal") : Ball.dataFaceAcceleration.x;
-        // Debug.Log("Dirección"+Ball.dataFaceAcceleration.x);
+            Debug.Log("Recorrido:"+value);
+
+            // if (value >= 0.5 && !statusChange)
+            if (value >= 0.1 && !statusChange) //? fines didacticos "justo caundo caes a la rampa"
+            {
+                statusChange = true;
+                closeCamera = true;
+                Debug.Log("Cambio de Controles del jugador 1");
+
+                //Iniciar la escucha del diccionario de eventos del microfono
+                keywordRecognizerSpeech.keywordRecognizer.Start();
+            }
+
+
+            Ball.moveX = flagKeyboard ? Input.GetAxis("Horizontal") : Ball.dataFaceAcceleration.x;
+            // Debug.Log("Dirección"+Ball.dataFaceAcceleration.x);
+        }
     }
 
 
@@ -159,7 +181,7 @@ public class Control : MonoBehaviour
         if (dataReceived != null)
         {
             Ball.dataFaceAcceleration = StringToArray(dataReceived);
-            Debug.Log("Nueva Aceleración: " + Ball.dataFaceAcceleration.y);
+            // Debug.Log("Nueva Aceleración: " + Ball.dataFaceAcceleration.y);
         }
 
         if (Ball.closePython || closeCamera)
