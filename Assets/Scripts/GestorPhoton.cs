@@ -128,6 +128,9 @@ public class GestorPhoton : MonoBehaviourPunCallbacks
     }
     IEnumerator waiter()
     {
+        GameObject blockque = GameObject.FindGameObjectWithTag("block1");
+        Destroy(blockque);
+
         yield return new WaitForSecondsRealtime(2);
         GameObject title = GameObject.FindGameObjectWithTag("text0");
         Destroy(title);

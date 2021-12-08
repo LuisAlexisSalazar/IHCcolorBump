@@ -17,6 +17,7 @@ TagManager:
   - text1
   - text0
   - text00
+  - block1
   layers:
   - Default
   - TransparentFX
