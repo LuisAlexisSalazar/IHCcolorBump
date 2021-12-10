@@ -12,3 +12,7 @@
 - Ejecutar el script de python de la carpeta de los detectores con el comando ```python ConnectionManager.py```.
 - Esperar a que el script muestre las ventanas de la cámara activada, esto significa que ya puede detectar y por ende usted ya puede jugar.
 
+## Link del video:
+
+https://www.youtube.com/watch?v=8zTxh4GByh4
+
