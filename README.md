@@ -3,7 +3,7 @@
 ## Preparación
 
 - Descargar el siguiente [repositorio de detectores](https://github.com/LoneHandyman/Face-Detector-Unity/tree/master) para obtener la detección de rostro y gestos de la mano.
-- Instalar Unity (versión 2020).
+- Instalar Unity (versión 2020.3.16f1).
 - Seleccionar la escena llamada **MainMenu** y correr el juego desde el editor.
 
 ## Ejecución
